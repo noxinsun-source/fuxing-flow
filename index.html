@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>复兴青年说·决赛系统数据流转图</title>
+<style>
+:root{--red:#861c22;--red2:#a83238;--gold:#b88a3d;--ink:#2d2825;--muted:#746b65;--line:#ddcfc5;--paper:#f3eee8;--panel:#fffdfa;--blue:#3976a8;--green:#2d865d;--purple:#7454a3}*{box-sizing:border-box}html,body{height:100%;margin:0}body{overflow:hidden;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}.app{height:100%;display:flex;flex-direction:column}.topbar{position:relative;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 18px;background:#fffdfaf2;border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}.title h1{margin:0;color:var(--red);font-family:STSong,"Songti SC",serif;font-size:22px}.title p{margin:4px 0 0;color:var(--muted);font-size:12px}.tools,.filters{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.tool,.filter{border:1px solid #d4c6bc;border-radius:9px;padding:8px 11px;background:#fff;color:var(--ink);font-size:12px;cursor:pointer}.tool:hover,.filter:hover{border-color:var(--red)}.tool.mode-active{border-color:var(--red);background:var(--red);color:#fff}.filter.active{background:var(--red);border-color:var(--red);color:#fff}.zoom-label{min-width:48px;text-align:center;color:var(--muted);font-size:12px}.stage{position:relative;flex:1;min-height:0;overflow:hidden;cursor:grab;background-image:radial-gradient(#a996871f 1px,transparent 1px);background-size:22px 22px;perspective:1600px;perspective-origin:50% 46%}.stage.panning,.stage.rotating{cursor:grabbing}.board{position:absolute;left:0;top:0;width:2050px;height:1200px;transform-origin:1025px 600px;transform-style:preserve-3d;will-change:transform}.connections{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.edge{fill:none;stroke-width:3;opacity:.86}.edge.audience{stroke:var(--blue)}.edge.top6{stroke:var(--gold)}.edge.judge{stroke:var(--red2)}.edge.final{stroke:var(--green)}.edge.secondary{stroke-dasharray:9 7}.edge-label{position:absolute;z-index:2;max-width:220px;transform:translate(-50%,-50%);padding:5px 8px;border:1px solid #d9ccc2;border-radius:8px;background:#fffdfaeF;color:#5e554f;font-size:11px;line-height:1.35;text-align:center;pointer-events:none;box-shadow:0 3px 12px #5c34200d}.node{position:absolute;z-index:4;width:300px;border:1px solid var(--line);border-radius:16px;background:var(--panel);box-shadow:0 9px 25px #4b2b1817;overflow:hidden;cursor:move;user-select:none;transition:opacity .18s,filter .18s,box-shadow .18s,transform .35s}.node:hover{box-shadow:0 12px 30px #4b2b1828}.node-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 13px;border-bottom:1px solid #eee5df}.node-title{font-weight:800;color:var(--red);font-size:14px}.node-type{padding:3px 7px;border-radius:999px;background:#f1e8e2;color:#675d56;font-size:10px}.node img{display:block;width:100%;height:182px;object-fit:cover;object-position:top;background:#eee6df;pointer-events:none}.node-body{padding:11px 13px}.node-body p{margin:0;color:#5f5650;font-size:11px;line-height:1.55}.node-body strong{color:var(--ink)}.node.hub{width:310px;padding:0}.hub .node-body{padding:14px}.storage{display:grid;gap:8px;margin-top:10px}.storage div{padding:8px 9px;border-left:3px solid var(--gold);background:#f8f3ee;font-size:11px;line-height:1.45}.result-node{width:300px}.result-node .rank{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0}.rank span{padding:10px 4px;border-radius:9px;text-align:center;background:#f8efe1;color:#7a5319;font-size:11px}.node.dimmed,.edge-label.dimmed,.edge3d.dimmed,.edge3d-label.dimmed{opacity:.16;filter:grayscale(.8)}.edge.dimmed{opacity:.09}.info{position:absolute;z-index:12;right:16px;bottom:16px;width:min(340px,calc(100% - 32px));padding:13px 15px;border:1px solid var(--line);border-radius:14px;background:#fffdfaf2;box-shadow:0 8px 24px #4b2b1820;backdrop-filter:blur(10px);pointer-events:none}.info h2{margin:0 0 5px;color:var(--red);font-size:15px}.info p{margin:0;color:#5f5650;font-size:11px;line-height:1.55}.legend{position:absolute;z-index:11;left:16px;bottom:16px;display:flex;gap:12px;flex-wrap:wrap;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:#fffdfaeB;font-size:10px;color:var(--muted);pointer-events:none}.legend span{display:flex;align-items:center;gap:5px}.legend i{display:block;width:22px;height:3px;border-radius:3px}.hint{position:absolute;z-index:10;left:16px;top:14px;padding:7px 10px;border-radius:9px;background:#2d2825d9;color:#fff;font-size:11px;pointer-events:none}.depth-plane,.connections3d{display:none}.stage.mode-3d .connections,.stage.mode-3d .edge-label{display:none}.stage.mode-3d .depth-plane{display:block;position:absolute;left:20px;top:25px;width:1990px;height:1110px;border:3px solid;border-radius:30px;pointer-events:none;transform-style:preserve-3d}.stage.mode-3d .front-plane{border-color:#3976a855;background:#3976a80b;transform:translateZ(115px)}.stage.mode-3d .back-plane{border-color:#b88a3d88;background:#b88a3d10;transform:translateZ(-175px)}.plane-title{position:absolute;left:28px;top:22px;padding:10px 15px;border-radius:12px;color:#fff;font-weight:800;font-size:19px;letter-spacing:.03em;box-shadow:0 5px 18px #30211322}.front-plane .plane-title{background:#3976a8}.back-plane .plane-title{background:#9a6d25}.stage.mode-3d .node{overflow:visible;cursor:pointer;transform:translateZ(var(--depth,140px));transform-style:preserve-3d}.stage.mode-3d .node::before,.stage.mode-3d .node::after{content:"";position:absolute;display:block;border-radius:5px;background:linear-gradient(135deg,#b9aaa0,#77695f);pointer-events:none}.stage.mode-3d .node::before{top:8px;right:-1px;width:22px;height:calc(100% - 8px);transform-origin:right center;transform:rotateY(90deg)}.stage.mode-3d .node::after{left:8px;bottom:-1px;width:calc(100% - 8px);height:22px;transform-origin:center bottom;transform:rotateX(-90deg)}.stage.mode-3d .node>*{position:relative;z-index:2;background:var(--panel)}.stage.mode-3d .node-head{border-radius:15px 15px 0 0}.stage.mode-3d .node-body{border-radius:0 0 15px 15px}.stage.mode-3d .connections3d{display:block;position:absolute;inset:0;transform-style:preserve-3d;pointer-events:none}.edge3d{position:absolute;height:6px;border-radius:999px;transform-origin:0 50%;opacity:.88;box-shadow:0 1px 4px #2d282544;transition:opacity .18s,filter .18s}.edge3d::after{content:"";position:absolute;right:-2px;top:50%;width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:18px solid currentColor;transform:translateY(-50%)}.edge3d.audience{background:var(--blue);color:var(--blue)}.edge3d.top6{background:var(--gold);color:var(--gold)}.edge3d.judge{background:var(--red2);color:var(--red2)}.edge3d.final{background:var(--green);color:var(--green)}.edge3d.secondary{background:repeating-linear-gradient(90deg,currentColor 0 12px,transparent 12px 21px);box-shadow:none}.edge3d-label{position:absolute;max-width:185px;padding:7px 9px;border:1px solid #cfbeb2;border-radius:8px;background:#fffdfaf2;color:#554b45;font-size:10px;line-height:1.35;text-align:center;transform:translate3d(-50%,-50%,var(--label-depth));box-shadow:0 4px 12px #2d28251c;transition:opacity .18s,filter .18s}.mini{display:none}@media(max-width:900px){.topbar{align-items:flex-start;flex-direction:column}.title p{display:none}.tools{width:100%;justify-content:space-between}.filters{width:100%;overflow:auto;flex-wrap:nowrap}.stage{min-height:0;perspective:1050px}.info{bottom:12px}.legend{display:none}.hint{top:10px}.tool,.filter{padding:7px 9px}.plane-title{font-size:15px}}
+.board{transform-origin:0 0}.stage.mode-3d .board{transform-origin:1025px 600px}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="title"><h1>复兴青年说·决赛系统数据流转图</h1><p>界面截图 × 数据去向 × 同步时机（当前线上版本）</p></div>
+    <div class="filters" aria-label="流程筛选">
+      <button class="filter active" data-filter="all">全部流程</button>
+      <button class="filter" data-filter="audience">大众评审</button>
+      <button class="filter" data-filter="top6">前6名开放</button>
+      <button class="filter" data-filter="judge">即兴评委</button>
+      <button class="filter" data-filter="final">最终统分</button>
+    </div>
+    <div class="tools">
+      <a class="tool" href="system-pages.html">真实界面与地址</a>
+      <button class="tool" id="toggle3D" aria-pressed="false">切换3D视图</button>
+      <button class="tool" id="zoomOut" aria-label="缩小">−</button><span class="zoom-label" id="zoomLabel">100%</span><button class="tool" id="zoomIn" aria-label="放大">＋</button>
+      <button class="tool" id="resetView">适应画布</button>
+    </div>
+  </header>
+  <main class="stage" id="stage">
+    <div class="hint" id="hint">拖拽空白处移动画布 · 滚轮缩放 · 点击方块打开对应页面</div>
+    <div class="board" id="board">
+      <div class="depth-plane front-plane"><span class="plane-title">界面层 · 前端</span></div>
+      <div class="depth-plane back-plane"><span class="plane-title">CloudBase · 后端</span></div>
+      <div class="connections3d" id="connections3d" aria-label="前后端三维数据传输连线"></div>
+      <svg class="connections" id="connections" viewBox="0 0 2050 1200" aria-label="系统数据流向箭头">
+        <defs>
+          <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3976a8"/></marker>
+          <marker id="arrow-gold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b88a3d"/></marker>
+          <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a83238"/></marker>
+          <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2d865d"/></marker>
+        </defs>
+      </svg>
+
+      <article class="node" id="audienceForm" data-flows="audience" style="left:45px;top:115px" data-title="大众评审问卷" data-detail="匿名设备识别码；同一设备对每位选手只能提交一次。每次提交五项分数与总分。">
+        <div class="node-head"><span class="node-title">1 · 大众评审扫码问卷</span><span class="node-type">手机前端</span></div>
+        <img src="system-flow-assets/audience-form.jpg" alt="大众评审问卷界面截图">
+        <div class="node-body"><p><strong>输出：</strong>选手编号＋5项分数＋设备ID<br><strong>触发：</strong>点击“确认提交”</p></div>
+      </article>
+
+      <article class="node hub" id="audienceData" data-flows="audience top6 final" style="left:445px;top:235px" data-title="大众评审云数据" data-detail="云函数验证设备和选手唯一性，然后写入 final_audience_scores。排行和平均分每次读取时重新计算。">
+        <div class="node-head"><span class="node-title">CloudBase · 大众评审数据</span><span class="node-type">云函数＋数据库</span></div>
+        <div class="node-body"><p>API：<code>/submit</code> · <code>/status</code></p><div class="storage"><div><strong>final_audience_scores</strong><br>每设备 × 每选手一条记录</div><div>读取时按选手计算人数、平均分和排名</div></div></div>
+      </article>
+
+      <article class="node" id="audienceAdmin" data-flows="audience" style="left:805px;top:55px" data-title="大众评审后台" data-detail="同一设备的12位选手记录汇总为一行。删除整行后，人数、平分和排名都会基于剩余记录重新计算。">
+        <div class="node-head"><span class="node-title">2 · 大众评审后台</span><span class="node-type">监控与导出</span></div>
+        <img src="system-flow-assets/audience-admin.jpg" alt="大众评审后台界面截图">
+        <div class="node-body"><p><strong>刷新：</strong>页面每10秒自动／按钮立即<br><strong>删除：</strong>按设备整行删除</p></div>
+      </article>
+
+      <article class="node" id="calculation" data-flows="audience top6 judge final" style="left:1280px;top:115px;width:325px" data-title="决赛总控算分" data-detail="第一阶段＝第一轮4位评委均分×60%＋大众均分×10%。确认前6后，第二轮均分×30%加入最终成绩。">
+        <div class="node-head"><span class="node-title">3 · 决赛总控算分</span><span class="node-type">排名与奖项</span></div>
+        <img src="system-flow-assets/calculation.jpg" alt="决赛总控算分界面截图">
+        <div class="node-body"><p><strong>一阶段：</strong>60% 评委＋10% 大众<br><strong>终赛：</strong>一阶段＋30% 即兴评委</p></div>
+      </article>
+
+      <article class="node hub" id="calculationState" data-flows="top6 judge final" style="left:1350px;top:655px" data-title="总控云端状态" data-detail="保存第一轮手工分数、前6名单、第二轮备用分和已选正式即兴评委ID。">
+        <div class="node-head"><span class="node-title">CloudBase · 总控状态</span><span class="node-type">持久化</span></div>
+        <div class="node-body"><p>API：<code>/calculation</code></p><div class="storage"><div><strong>final_scoring_state</strong><br>第一轮分数、topSix、备用分</div><div><strong>judge-selection</strong><br>同步到总控的4位评委ID（有顺序）</div></div></div>
+      </article>
+
+      <article class="node" id="judgeForm" data-flows="top6 judge" style="left:45px;top:735px" data-title="即兴评委问卷" data-detail="从总控云端读取已确认的6位晋级选手。要求评委填写完整姓名，同一设备对每位选手只能提交一次。">
+        <div class="node-head"><span class="node-title">4 · 即兴评委问卷</span><span class="node-type">评委手机</span></div>
+        <img src="system-flow-assets/judge-form.jpg" alt="即兴评委问卷界面截图">
+        <div class="node-body"><p><strong>名单：</strong>未开放时每5秒检查<br><strong>提交：</strong>每位选手的5项分数＋总分</p></div>
+      </article>
+
+      <article class="node hub" id="judgeData" data-flows="judge final" style="left:445px;top:745px" data-title="即兴评委云数据" data-detail="服务器检查该设备是否参加过大众评审、评委姓名是否绑定其他设备，以及是否重复评分。">
+        <div class="node-head"><span class="node-title">CloudBase · 即兴评委数据</span><span class="node-type">云函数＋数据库</span></div>
+        <div class="node-body"><p>API：<code>/judge-submit</code> · <code>/judge-status</code></p><div class="storage"><div><strong>final_improv_judge_scores</strong><br>每评委设备 × 每晋级选手一条</div><div>保存姓名、设备ID、选手编号、5项分和总分</div></div></div>
+      </article>
+
+      <article class="node" id="judgeAdmin" data-flows="judge final" style="left:805px;top:705px" data-title="即兴评委后台" data-detail="每位评委设备一行，横向显示6位选手总分。勾选恰好4位并点击同步，决定总控的即兴评委1—4。">
+        <div class="node-head"><span class="node-title">5 · 即兴评委后台</span><span class="node-type">4位正式评委选择</span></div>
+        <img src="system-flow-assets/judge-admin.jpg" alt="即兴评委后台界面截图">
+        <div class="node-body"><p><strong>勾选：</strong>评委姓名＋设备ID一行<br><strong>同步：</strong>点击“同步所4位到总控”</p></div>
+      </article>
+
+      <article class="node result-node" id="finalResult" data-flows="final" style="left:1700px;top:700px" data-title="最终成绩与奖项" data-detail="每位晋级选手需要4个有效即兴分（在线分优先，缺失位置可用手工备用分）。数据到达浏览器后立即计算排名。">
+        <div class="node-head"><span class="node-title">6 · 最终排名与奖项</span><span class="node-type">自动计算</span></div>
+        <div class="node-body"><p><strong>综合分＝</strong>第一轮均分×60% ＋ 大众均分×10% ＋ 即兴均分×30%</p><div class="rank"><span>一等奖<br>1人</span><span>二等奖<br>2人</span><span>三等奖<br>3人</span></div><p>同分先比即兴分；仍同分则提示评委会裁定。</p></div>
+      </article>
+
+      <div class="edge-label" id="label-e1">提交后立即写入<br>通常为1—3秒</div>
+      <div class="edge-label" id="label-e2">手动刷新立即<br>后台每10秒自动</div>
+      <div class="edge-label" id="label-e3">手动刷新立即<br>总控每10秒自动</div>
+      <div class="edge-label" id="label-e4">改动后约700ms自动保存<br>也可点“立即保存”</div>
+      <div class="edge-label" id="label-e5">前6名未开放时<br>问卷每5秒检查</div>
+      <div class="edge-label" id="label-e6">每位选手确认提交后<br>立即写入云端</div>
+      <div class="edge-label" id="label-e7">手动刷新立即<br>后台每10秒自动</div>
+      <div class="edge-label" id="label-e8">点击同步按钮<br>保存4位评委ID与顺序</div>
+      <div class="edge-label" id="label-e9">总控“刷新评委问卷”立即<br>或最多约10秒自动</div>
+      <div class="edge-label" id="label-e10">数据齐全后<br>浏览器立即重算</div>
+    </div>
+    <div class="legend"><span><i style="background:var(--blue)"></i>大众评审数据</span><span><i style="background:var(--gold)"></i>前6名与开放权限</span><span><i style="background:var(--red2)"></i>即兴评委数据</span><span><i style="background:var(--green)"></i>最终统分</span></div>
+    <aside class="info" id="info"><h2>阅读方法</h2><p>按箭头从问卷追踪到云数据、后台和总控。点击任意节点可查看它在系统中的作用。</p></aside>
+  </main>
+</div>
+<script>
+const stage=document.getElementById('stage'),board=document.getElementById('board'),zoomLabel=document.getElementById('zoomLabel'),info=document.getElementById('info'),hint=document.getElementById('hint'),toggle3D=document.getElementById('toggle3D');
+const flowMarker={audience:'arrow-blue',top6:'arrow-gold',judge:'arrow-red',final:'arrow-green'};
+const nodeDepth={audienceForm:140,audienceData:-140,audienceAdmin:140,calculation:140,calculationState:-140,judgeForm:140,judgeData:-140,judgeAdmin:140,finalResult:140};
+const nodeUrl={audienceForm:'score.html',audienceData:'admin.html',audienceAdmin:'admin.html',calculation:'calculation.html',calculationState:'calculation.html',judgeForm:'judge.html',judgeData:'judge-admin.html',judgeAdmin:'judge-admin.html',finalResult:'calculation.html'};
+const edges=[
+ {id:'e1',from:'audienceForm',to:'audienceData',flow:'audience'},
+ {id:'e2',from:'audienceData',to:'audienceAdmin',flow:'audience'},
+ {id:'e3',from:'audienceData',to:'calculation',flow:'audience'},
+ {id:'e4',from:'calculation',to:'calculationState',flow:'top6'},
+ {id:'e5',from:'calculationState',to:'judgeForm',flow:'top6',secondary:true},
+ {id:'e6',from:'judgeForm',to:'judgeData',flow:'judge'},
+ {id:'e7',from:'judgeData',to:'judgeAdmin',flow:'judge'},
+ {id:'e8',from:'judgeAdmin',to:'calculationState',flow:'judge'},
+ {id:'e9',from:'judgeData',to:'calculation',flow:'judge',secondary:true},
+ {id:'e10',from:'calculation',to:'finalResult',flow:'final'}
+];
+let scale=1,panX=0,panY=0,activeFilter='all',panState=null,dragState=null,rotateState=null,is3D=false,angleX=48,angleY=-24,suppressNodeOpen=false;
+Object.entries(nodeDepth).forEach(([id,depth])=>document.getElementById(id).style.setProperty('--depth',`${depth}px`));
+function nodeBox(id){const el=document.getElementById(id);return{x:el.offsetLeft,y:el.offsetTop,w:el.offsetWidth,h:el.offsetHeight}}
+function boundaryPoint(a,b){const ac={x:a.x+a.w/2,y:a.y+a.h/2},bc={x:b.x+b.w/2,y:b.y+b.h/2},dx=bc.x-ac.x,dy=bc.y-ac.y;const t=Math.min(Math.abs(dx)>0?a.w/2/Math.abs(dx):Infinity,Math.abs(dy)>0?a.h/2/Math.abs(dy):Infinity);return{x:ac.x+dx*t,y:ac.y+dy*t}}
+function create3DEdges(){const layer=document.getElementById('connections3d');layer.replaceChildren();edges.forEach(edge=>{const a=nodeBox(edge.from),b=nodeBox(edge.to),start=boundaryPoint(a,b),end=boundaryPoint(b,a),z1=nodeDepth[edge.from],z2=nodeDepth[edge.to],dx=end.x-start.x,dy=end.y-start.y,dz=z2-z1,flat=Math.hypot(dx,dy),length=Math.hypot(flat,dz),yaw=Math.atan2(dy,dx)*180/Math.PI,pitch=Math.atan2(dz,flat)*180/Math.PI;const line=document.createElement('div');line.className=`edge3d ${edge.flow}${edge.secondary?' secondary':''}`;line.dataset.flow=edge.flow;line.style.left=`${start.x}px`;line.style.top=`${start.y}px`;line.style.width=`${length}px`;line.style.transform=`translateZ(${z1}px) rotateZ(${yaw}deg) rotateY(${-pitch}deg)`;const label=document.createElement('div');label.className='edge3d-label';label.dataset.flow=edge.flow;label.style.left=`${(start.x+end.x)/2}px`;label.style.top=`${(start.y+end.y)/2}px`;label.style.setProperty('--label-depth',`${(z1+z2)/2+10}px`);label.innerHTML=document.getElementById(`label-${edge.id}`).innerHTML;layer.append(line,label)});applyFilter(activeFilter)}
+function redraw(){const svg=document.getElementById('connections');svg.querySelectorAll('path[data-edge]').forEach(path=>path.remove());edges.forEach(edge=>{const a=nodeBox(edge.from),b=nodeBox(edge.to),start=boundaryPoint(a,b),end=boundaryPoint(b,a),dx=end.x-start.x,curve=Math.max(45,Math.min(190,Math.abs(dx)*.35));const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.dataset.edge=edge.id;path.dataset.flow=edge.flow;path.setAttribute('class',`edge ${edge.flow}${edge.secondary?' secondary':''}`);path.setAttribute('marker-end',`url(#${flowMarker[edge.flow]})`);path.setAttribute('d',`M ${start.x} ${start.y} C ${start.x+(dx>=0?curve:-curve)} ${start.y}, ${end.x-(dx>=0?curve:-curve)} ${end.y}, ${end.x} ${end.y}`);svg.appendChild(path);const label=document.getElementById(`label-${edge.id}`);label.dataset.flow=edge.flow;label.style.left=`${(start.x+end.x)/2}px`;label.style.top=`${(start.y+end.y)/2}px`});if(is3D)create3DEdges();applyFilter(activeFilter)}
+function applyTransform(){board.style.transform=is3D?`translate(${panX}px,${panY}px) scale(${scale}) rotateX(${angleX}deg) rotateY(${angleY}deg)`:`translate(${panX}px,${panY}px) scale(${scale})`;zoomLabel.textContent=`${Math.round(scale*100)}%`}
+function fitBoard(resetAngle=false){const rect=stage.getBoundingClientRect(),base=Math.min((rect.width-50)/2050,(rect.height-50)/1200);if(is3D){if(resetAngle){angleX=48;angleY=-24}scale=Math.min(.68,Math.max(.16,base*.82));panX=rect.width/2-1025;panY=rect.height/2-600}else{scale=Math.min(.88,Math.max(.16,base));panX=(rect.width-2050*scale)/2;panY=(rect.height-1200*scale)/2}applyTransform()}
+function setScale(next,clientX=stage.clientWidth/2,clientY=stage.clientHeight/2){next=Math.max(.16,Math.min(1.35,next));if(is3D){scale=next;applyTransform();return}const rect=stage.getBoundingClientRect(),x=clientX-rect.left,y=clientY-rect.top,worldX=(x-panX)/scale,worldY=(y-panY)/scale;panX=x-worldX*next;panY=y-worldY*next;scale=next;applyTransform()}
+function applyFilter(filter){activeFilter=filter;document.querySelectorAll('.filter').forEach(btn=>btn.classList.toggle('active',btn.dataset.filter===filter));document.querySelectorAll('.node').forEach(node=>{const flows=(node.dataset.flows||'').split(' ');node.classList.toggle('dimmed',filter!=='all'&&!flows.includes(filter))});document.querySelectorAll('.edge,.edge-label,.edge3d,.edge3d-label').forEach(el=>el.classList.toggle('dimmed',filter!=='all'&&el.dataset.flow!==filter))}
+function set3D(next){is3D=next;stage.classList.toggle('mode-3d',is3D);toggle3D.classList.toggle('mode-active',is3D);toggle3D.setAttribute('aria-pressed',String(is3D));toggle3D.textContent=is3D?'返回2D视图':'切换3D视图';hint.textContent=is3D?'拖拽空白处旋转3D · Shift＋拖拽平移 · 点击方块打开对应页面':'拖拽空白处移动画布 · 滚轮缩放 · 点击方块打开对应页面';if(is3D){create3DEdges();info.innerHTML='<h2>3D前后端纵深</h2><p>蓝框是浏览器前端界面；跨层彩线先经过 CloudBase 云函数/API（校验、汇总、同步），再到金框中的云端数据状态。这里按业务职责分层，并非 OSI 七层协议图。</p>'}else{info.innerHTML='<h2>阅读方法</h2><p>按箭头从问卷追踪到云数据、后台和总控。点击任意方块会在新页面打开对应的真实系统界面。</p>'}fitBoard(true)}
+document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>applyFilter(btn.dataset.filter)));
+toggle3D.addEventListener('click',()=>set3D(!is3D));document.getElementById('zoomIn').addEventListener('click',()=>setScale(scale+.1));document.getElementById('zoomOut').addEventListener('click',()=>setScale(scale-.1));document.getElementById('resetView').addEventListener('click',()=>fitBoard(true));
+stage.addEventListener('wheel',event=>{event.preventDefault();setScale(scale*(event.deltaY>0?.9:1.1),event.clientX,event.clientY)},{passive:false});
+stage.addEventListener('pointerdown',event=>{if(event.target.closest('.node,.tool,.filter'))return;if(is3D&&!event.shiftKey){rotateState={x:event.clientX,y:event.clientY,angleX,angleY};stage.classList.add('rotating')}else{panState={x:event.clientX,y:event.clientY,panX,panY};stage.classList.add('panning')}stage.setPointerCapture(event.pointerId)});
+stage.addEventListener('pointermove',event=>{if(rotateState){angleY=rotateState.angleY+(event.clientX-rotateState.x)*.24;angleX=Math.max(-72,Math.min(72,rotateState.angleX-(event.clientY-rotateState.y)*.18));applyTransform()}if(panState){panX=panState.panX+event.clientX-panState.x;panY=panState.panY+event.clientY-panState.y;applyTransform()}if(dragState){if(Math.abs(event.clientX-dragState.x)>4||Math.abs(event.clientY-dragState.y)>4)suppressNodeOpen=true;const node=dragState.node;node.style.left=`${Math.max(0,dragState.left+(event.clientX-dragState.x)/scale)}px`;node.style.top=`${Math.max(0,dragState.top+(event.clientY-dragState.y)/scale)}px`;redraw()}});
+function endPointer(event){panState=null;dragState=null;rotateState=null;stage.classList.remove('panning','rotating');try{stage.releasePointerCapture(event.pointerId)}catch{}}
+stage.addEventListener('pointerup',endPointer);stage.addEventListener('pointercancel',endPointer);
+document.querySelectorAll('.node').forEach(node=>{node.addEventListener('pointerdown',event=>{event.stopPropagation();if(is3D)return;dragState={node,x:event.clientX,y:event.clientY,left:node.offsetLeft,top:node.offsetTop};stage.setPointerCapture(event.pointerId)});node.addEventListener('click',()=>{if(suppressNodeOpen){suppressNodeOpen=false;return}info.innerHTML=`<h2>${node.dataset.title}</h2><p>${node.dataset.detail}</p>`;const url=nodeUrl[node.id];if(url){const opened=window.open(url,'_blank');if(!opened)window.location.assign(url)}})});
+window.addEventListener('resize',()=>fitBoard(false));window.addEventListener('load',()=>{redraw();fitBoard(false)});
+</script>
+</body>
+</html>
